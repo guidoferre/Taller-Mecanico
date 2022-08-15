@@ -77,6 +77,8 @@ def Buscar(request):
     return HttpResponse(respuesta)  
 
 
+
+
 def lista_clientes(self):
 
     lista = cliente.objects.all()
@@ -135,6 +137,8 @@ class ClienteList (LoginRequiredMixin, ListView):
 
     model= cliente
     template_name = 'clientesList.html'
+
+
 
 class ClienteDetail (DetailView):
 

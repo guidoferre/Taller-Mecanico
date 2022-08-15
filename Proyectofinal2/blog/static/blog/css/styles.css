@@ -89,6 +89,16 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.lista_reparaciones {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 10px;
+  justify-items: center;
+  margin-bottom: 30px;
+}
+
+
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -4563,10 +4573,11 @@ textarea.form-control-lg {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: aliceblue;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin: 20px;
 }
 .card > hr {
   margin-right: 0;
@@ -4638,6 +4649,8 @@ textarea.form-control-lg {
   margin-left: -0.5rem;
   border-bottom: 0;
 }
+
+
 
 .card-header-pills {
   margin-right: -0.5rem;
