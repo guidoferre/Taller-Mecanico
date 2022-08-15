@@ -236,11 +236,15 @@ sup {
 
 a {
   color: #0d6efd;
-  text-decoration: underline;
+  text-decoration: none;
+  transition: 0.3s ease;
 }
+
 a:hover {
   color: #0a58ca;
 }
+
+
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
   color: inherit;
@@ -3032,6 +3036,7 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #0d6efd;
   border-color: #0d6efd;
+  transition: 0.3s ease;
 }
 .btn-primary:hover {
   color: #fff;
@@ -3059,10 +3064,20 @@ textarea.form-control-lg {
 }
 
 .btn-secondary {
+  padding: 3px;
+  margin: 10px;
+  border-radius: 5px;
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
+  transition: 0.3s ease;
+  box-shadow: 0 0 3px 0 black;
 }
+
+.btn-secondary a{
+  color: white;
+}
+
 .btn-secondary:hover {
   color: #fff;
   background-color: #5c636a;
@@ -3179,10 +3194,16 @@ textarea.form-control-lg {
 }
 
 .btn-danger {
+  padding: 3px;
+  margin: 10px;
+  border-radius: 5px;
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;
+  transition: 0.3s ease;
+  box-shadow: 0 0 3px 0 black;
 }
+
 .btn-danger:hover {
   color: #fff;
   background-color: #bb2d3b;
@@ -4036,6 +4057,8 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+
+
 .navbar > .container,
 .navbar > .container-fluid,
 .navbar > .container-sm,
@@ -4048,14 +4071,41 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
 }
+
+
 .navbar-brand {
+  color: white;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
   text-decoration: none;
   white-space: nowrap;
+  transition: 0.3s ease;
 }
+
+.navbar-brand:hover {
+  color:#0d6efd
+}
+
+
+.user {
+  align-items: center;
+  font-size:20px;
+  align-self: center;
+  margin-top: 13px;
+  cursor: pointer;
+}
+
+
+.forms {
+  display: flex;
+  justify-content:first baseline;
+  align-items: center;
+  background-color: white;
+  /* list-style: none; */
+}
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -4437,10 +4487,10 @@ textarea.form-control-lg {
   overflow-y: visible;
 }
 
-.navbar-light .navbar-brand {
+.navbar-light  {
   color: rgba(0, 0, 0, 0.9);
 }
-.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+.navbar-light, .navbar-light {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-nav .nav-link {
@@ -4472,10 +4522,10 @@ textarea.form-control-lg {
   color: rgba(0, 0, 0, 0.9);
 }
 
-.navbar-dark .navbar-brand {
+.navbar-dark {
   color: #fff;
 }
-.navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
+.navbar-dark , .navbar-dark {
   color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link {

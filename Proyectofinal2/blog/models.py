@@ -23,11 +23,11 @@ class mecanico(models.Model):
     def __str__(self) -> str:
         return f' {self.nombre} {self.apellido}'
 
+
 class reparacion(models.Model):
     Desperfecto = models.CharField(max_length=80)
     fechaDeEntrega = models.DateField()
     
    
-    
     def __str__(self) -> str:
         return f' {self.Desperfecto} - {self.fechaDeEntrega}'

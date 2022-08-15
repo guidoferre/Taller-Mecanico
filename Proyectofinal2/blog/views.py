@@ -26,9 +26,13 @@ def mecanico(request):
     
     return render(request, "mecanicos.html")
 
+
+
 def reparacion(request):
 
     return render(request, "Reparaciones.html")
+
+    
 
 
 def ClienteFormulario(request):
@@ -51,6 +55,8 @@ def ClienteFormulario(request):
         miFormulario = clienteFormulario()
 
     return render(request, "clienteFormulario.html", {"miFormulario": miFormulario})
+
+
 
 @login_required
 def BusquedaCliente(request):
@@ -185,6 +191,8 @@ def LoginView(request):
 
     return render(request, "Login.html", {"miFormulario": miFormulario})
 
+
+
 def register(request):
 
     if request.method == 'POST':
@@ -194,7 +202,7 @@ def register(request):
         if form.is_valid():
             username=  form.cleaned_data["username"]
 
-            form.save
+            form.save()
 
             return render(request, "Bienvenida.html", {"mensaje": f'usuario {username} creado'})
 
