@@ -1,9 +1,10 @@
+from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
-from blog.models import cliente, mecanico, reparacion
-from blog.forms import clienteFormulario
+from blog.models import Avatar, cliente, mecanico, reparacion
+from blog.forms import AvatarFormulario, UserEditForm, clienteFormulario
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -12,13 +13,26 @@ from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
 
-def inicio(self):
-    return render (self, "Bienvenida.html")
+def inicio(request):
+    try:
+        avatar = Avatar.objects.get(user=request.user.id) 
+        return render (request, "Bienvenida.html", {"url":avatar.imagen.url})
+    except:
+    
+        return render (request, "Bienvenida.html")
+
+    
 
 
 def Cliente(request):
 
     return render(request, "clientes.html")
+
+
+def EditaElimina(request):
+    lista = cliente.objects.all()
+
+    return render(request, "EditarEliminarCliente.html", {"lista_clientes": lista})
 
 
 @staff_member_required(login_url='Login')
@@ -49,7 +63,7 @@ def ClienteFormulario(request):
 
             Cliente = cliente(nombre = data['nombre'], apellido= data ['apellido'], vehiculo=data['vehiculo'])
             Cliente.save()
-            return render(request, "padre.html")
+            return render(request, "Bienvenida.html", {"mensaje": "Cliente cargado con exito"})
 
     else:
         miFormulario = clienteFormulario()
@@ -216,3 +230,50 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, "Registro.html", {"miFormulario": form})
+
+@login_required
+def editar_perfil(request):
+    usuario = request.user
+    if request.method == 'POST':
+
+        miFormulario = UserEditForm(request.POST, instance=request.user)
+        if miFormulario.is_valid(): 
+
+            data=miFormulario.cleaned_data
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+           
+            
+            usuario.save()
+            
+            return render(request, "Bienvenida.html", {"mensaje": "Datos actualizados con exito"})
+        
+    else:
+
+        miFormulario = UserEditForm(instance=request.user)
+
+    return render(request, "EditarPerfil.html", {"miFormulario": miFormulario})
+
+def agregar_avatar(request):
+    
+    if request.method == 'POST':
+
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+        if miFormulario.is_valid():
+
+            data=miFormulario.cleaned_data
+
+            avatar = Avatar(user = request.user, imagen= data ['imagen'])
+            avatar.save()
+            return render(request, "Bienvenida.html", {"mensaje": "avatar cargado"})
+
+    else:
+        miFormulario = AvatarFormulario()
+
+    return render(request, "CrearAvatar.html", {"miFormulario": miFormulario})
+
+
+    
+def EditarDatos(request):
+
+    return render(request, "EditarDatos.html")

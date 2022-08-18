@@ -30,7 +30,14 @@
 
                 
                 {% if user.is_authenticated %}
-                    <p class="user">Bienvenido {{user.username}}</p>
+                     
+                     {% if url %}
+                     <img src="{{url}}" height="40px" alt="avatar">
+                        
+                     {% endif %}
+
+                    <p style="color:white" class="user">Bienvenido {{user.username}}</p>
+                    <a class="btn btn-primary" href="{% url 'EditarDatos' %}"><b>Editar Perfil</b></a>
                     <a class="btn btn-primary" href="{% url 'Logout' %}"><b>Cerrar sesion</b></a>
                 
                 {% else %}

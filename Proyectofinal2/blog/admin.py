@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import cliente, mecanico, reparacion
+from blog.models import Avatar, cliente, mecanico, reparacion
 
 
 class ClienteAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class ClienteAdmin(admin.ModelAdmin):
 admin.site.register(cliente, ClienteAdmin)
 admin.site.register(mecanico)
 admin.site.register(reparacion)
+admin.site.register(Avatar)

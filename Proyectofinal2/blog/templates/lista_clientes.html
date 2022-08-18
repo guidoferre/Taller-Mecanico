@@ -3,26 +3,14 @@
 
 {% block bloqueQueCambia %}
    <h1>Bienvenidos a la seccion de clientes </h1>
-   <p>Aqui encontraras un listado de todos tus clientes</p>
+   <p>Aqui encontraras un listado de opciones para tus clientes</p>
    <ul>
 <a href="{% url 'clienteFormulario' %}">Cargar cliente</a>
-<p></p>
+<br>
 <a href="{% url 'clientelist' %}">Ver lista de clientes y sus vehiculos</a>
-<p></p>
+<br>
+<a href="{% url 'EditaEliminaCliente' %}">Editar clientes</a>
 
-
-        
-    {% for clientes in lista_clientes %}
-        <div>
-            <form action="{% url 'eliminaCliente' clientes.id %}"  class="forms" method="POST"> {% csrf_token %}
-            <li>{{clientes.nombre}} {{clientes.apellido}} </li>
-
-                <button type="submit" class="btn btn-danger" > eliminar</button>
-                <button class='btn btn-secondary'><a href="{% url 'editarCliente' clientes.id %}">editar</a></button>
-            </form>
-        </div>
-        
-    {% endfor %}
         
 
 

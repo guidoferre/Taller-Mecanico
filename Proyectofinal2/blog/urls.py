@@ -1,5 +1,5 @@
 from django.urls import path
-from blog.views import Cliente, ClienteCreate, ClienteDelete, ClienteDetail, ClienteList, LoginView, cliente, editarCliente, eliminarCliente, lista_clientes, mecanico, BusquedaCliente, ClienteFormulario, register, reparacion, inicio, Buscar
+from blog.views import Cliente, ClienteCreate, ClienteDelete, ClienteDetail, ClienteList, EditaElimina, EditarDatos, LoginView, agregar_avatar, cliente, editar_perfil, editarCliente, eliminarCliente, lista_clientes, mecanico, BusquedaCliente, ClienteFormulario, register, reparacion, inicio, Buscar
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -20,6 +20,10 @@ urlpatterns = [
     path('login/', LoginView, name ="Login" ),  
     path('registro/', register, name ="Registrar" ),  
     path('logout/', LogoutView.as_view(template_name='logout.html'), name ="Logout" ),  
+    path('editar-perfil/', editar_perfil, name ="EditarPerfil" ), 
+    path('agregar-avatar/', agregar_avatar, name ="CrearAvatar" ),  
+    path('editar-datos/', EditarDatos, name ="EditarDatos" ),  
+    path('EditaEliminaCliente/', EditaElimina, name ="EditaEliminaCliente" ), 
 
 
 
