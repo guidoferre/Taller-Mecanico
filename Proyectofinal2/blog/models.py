@@ -25,13 +25,20 @@ class mecanico(models.Model):
         return f' {self.nombre} {self.apellido}'
 
 
-class reparacion(models.Model):
-    Desperfecto = models.CharField(max_length=80)
+class Reparacion(models.Model):
+    desperfecto = models.CharField(max_length=80)
+    descripcion = models.CharField(max_length=140, null=True)
+    imagen = models.ImageField(upload_to='imagenes', blank=True, null = True)
     fechaDeEntrega = models.DateField()
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    video = models.URLField( max_length=200, null = True)
+
     
    
     def __str__(self) -> str:
-        return f' {self.Desperfecto} - {self.fechaDeEntrega}'
+        return f' {self.desperfecto} - {self.fechaDeEntrega}'
+
+
 
 class Avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

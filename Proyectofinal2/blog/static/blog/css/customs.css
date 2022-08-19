@@ -1,0 +1,44 @@
+:root {
+    --color1 : rgb(33, 37, 41);
+}
+
+
+
+.lista_reparaciones {
+    margin-top: -25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 10px;
+    justify-items: center;
+    margin-bottom: 30px;
+    background-color: #ddd;
+  }
+  
+  
+.form-edit {
+    border: none;
+    padding: 25px 40px;
+    border-radius: 25px;
+    background-color: #ddd ;
+    color: black;
+    width: 600px;
+    height: 380px;
+    box-shadow: var(--color1);
+  }
+  
+
+.tittle-subtittle {
+    margin-left: 30px;
+    width: 100%;
+    color: white;
+  }
+
+.cont-tittle{
+    background-color: rgb(33, 37, 41);
+}
+
+.card {
+    box-shadow: 5px 0px 15px 0px var(--color1);
+
+}
+  

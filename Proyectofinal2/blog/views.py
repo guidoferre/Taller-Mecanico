@@ -1,7 +1,7 @@
 from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
-from blog.models import Avatar, cliente, mecanico, reparacion
+from blog.models import Avatar, cliente, mecanico, Reparacion
 from blog.forms import AvatarFormulario, UserEditForm, clienteFormulario
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
@@ -21,7 +21,10 @@ def inicio(request):
     
         return render (request, "Bienvenida.html")
 
+def iReparacion(request):
     
+    imagenes = Reparacion.objects.get(user=request.user.id)
+    return render(request, 'Reparaciones.html', {'url':imagenes[0].imagen.url})
 
 
 def Cliente(request):
@@ -44,7 +47,9 @@ def mecanico(request):
 
 def reparacion(request):
 
-    return render(request, "Reparaciones.html")
+    print('POST\n:', request.POST)
+    lista_reparaciones = Reparacion.objects.all()
+    return render(request, "Reparaciones.html", {'lista_reparaciones':lista_reparaciones})
 
     
 
