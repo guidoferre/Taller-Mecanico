@@ -15,12 +15,16 @@
 <div class="cont-tittle">
   <div class="tittle-subtittle">
     <br>
-    <h1><img src='../static/blog/assets/img/icon-servicio.png'  width="40px"> Reparaciones</h1>
+    <h1 class='tittle'><img src='../static/blog/assets/img/icon-servicio.png'  width="40px"> Reparaciones</h1>
     <p>Contamos con un equipo de profesionales altamente calificados, alcanzando los estándares de excelencia requeridos en la industria
       automotriz. Nuestros técnicos son capaces de reparar toda marca y modelo de vehículo usando
       neumáticos de primeras marcas <br> y repuestos de excelente calidad.</p>
+      <a href="{% url 'clienteFormulario' %}"><button class='btn btn-primary'>Solicitar reparacion</button></a>
+      <br>
       <br>
   </div>
+  <br>
+
 </div>
 
 
@@ -33,7 +37,7 @@
   <div class="card-body">
     <h5 class="card-title">{{reparacion.desperfecto}}</h5>
     <p class="card-text">{{reparacion.descripcion}}</p>
-    <a href="{{reparacion.video}}" class="btn btn-primary">Ver mas</a>
+    <a href="{{reparacion.video}}" class="btn btn-primary" target="_blank">Ver mas</a>
   </div>
 </div>
   
@@ -46,17 +50,25 @@
 
 <nav aria-label="...">
   <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="#">2</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+  {% if current_page > 0 %}
+
     <li class="page-item">
-      <a class="page-link" href="#">Next</a>
+      <a class="previous" href="{% url 'reparaciones' current_page %}?direction=previous">Anterior</a>
     </li>
+    
+  {% endif %}
+      
+  
+  {% if current_page < 2  %}
+    
+    <li class="page-item">
+      <a class="next" href="{% url 'reparaciones' current_page %}?direction=next">Siguiente</a>
+    </li>
+
+
+  {% endif %}
+ 
   </ul>
 </nav>
 

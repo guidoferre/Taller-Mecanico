@@ -2,24 +2,36 @@
 
 
 {% block bloqueQueCambia %}
-   <h1>Bienvenido </h1>
-   <p>Aqui podras editar o elimar a tus clientes</p>
-   <ul>
+<div class="cont-tittle">
+    <div class="tittle-subtittle">
+       <br>
+       <br>
+        <h1 class='tittle'>Editar datos de tus clientes. </h1>
+        <h3>Modifica, elimina y gestiona los datos de tus clientes.</h3>
+        <ul>
+        <br>
+            {% for clientes in lista_clientes %}
+                <div>
+                    <form action="{% url 'eliminaCliente' clientes.id %}"  method="POST"> {% csrf_token %}
+                        <li> 
+                            <a  class='mi-link' style='color:white'> {{clientes.nombre}} {{clientes.apellido}} </a>
+                            <button type="submit" class="btn btn-primary" >Eliminar</button>
+                            <button class='btn btn-secondary'><a href="{% url 'editarCliente' clientes.id %}">Editar</a></button>
+                        </li>
+                        <br>                 
+                    </form>
+                </div>
+                
+            {% endfor %}
+        </ul>
 
-    {% for clientes in lista_clientes %}
-        <div>
-            <form action="{% url 'eliminaCliente' clientes.id %}"  class="forms" method="POST"> {% csrf_token %}
-            <li>{{clientes.nombre}} {{clientes.apellido}} </li>
+        <br>
+        <a href="{% url 'lista' %}" class='mi-link'>Volver</a>
 
-                <button type="submit" class="btn btn-danger" > eliminar</button>
-                <button class='btn btn-secondary'><a href="{% url 'editarCliente' clientes.id %}">editar</a></button>
-            </form>
         </div>
-        
-    {% endfor %}
-</ul>
+        <br>
 
-
-    
+</div>
+  
 {% endblock bloqueQueCambia  %}
             

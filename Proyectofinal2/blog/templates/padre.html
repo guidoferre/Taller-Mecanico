@@ -16,6 +16,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'blog/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'blog/css/customs.css' %}" rel="stylesheet" />
 
         
         {% block style %}
@@ -28,22 +29,25 @@
         <!-- Navigation-->
         <nav class="navbar navbar-dark bg-dark">
             <div class="container">
+                <a href="{% url 'inicio' %}"><img src="../static/blog/assets/img/logo.png" alt="" width="150px"></a>
                 <a class="navbar-brand" href="{% url 'inicio' %}"><img src='../static/blog/assets/img/icon-home.png'  width="25px"> Inicio</a>
+                <a class="navbar-brand" href="{% url 'quienesSomos' %}"><img src="../static/blog/assets/img/icono-nosotros.png" alt="" width="35px"> ¿Quienes Somos?</a>
+                <a class="navbar-brand" href="{% url 'MecanicoFormulario' %}"><img src='../static/blog/assets/img/mecanicos.png'  width="25px"> Mecanicos</a>
+                <a class="navbar-brand" href="{% url 'reparaciones' 0 %}"><img src='../static/blog/assets/img/icon-servicio.png'  width="25px"> Reparaciones</a>
                 <a class="navbar-brand" href="{% url 'lista' %}"><img src='../static/blog/assets/img/icon-clientes.png'  width="25px"> Clientes</a>
-                <a class="navbar-brand" href="{% url 'clienteFormulario' %}">Cargar clientes</a>
-                <a class="navbar-brand" href="{% url 'BusquedaCliente' %}"><img src='../static/blog/assets/img/icon-search.png'  width="30px"> Buscar clientes</a>
-                <a class="navbar-brand" href="{% url 'mecanico' %}">Mecanicos</a>
-                <a class="navbar-brand" href="{% url 'reparaciones' %}"><img src='../static/blog/assets/img/icon-servicio.png'  width="25px"> Reparaciones</a>
 
                 
+
                 {% if user.is_authenticated %}
                      
                      {% if url %}
                      <img src="{{url}}" height="40px" alt="avatar">
+                     
                         
                      {% endif %}
+                    
 
-                    <p style="color:white" class="user">Bienvenido {{user.username}}</p>
+                    <p style="color:white" class="user">Hola {{user.username}}!</p>
                     <a class="btn btn-primary" href="{% url 'EditarDatos' %}"><b>Editar Perfil</b></a>
                     <a class="btn btn-primary" href="{% url 'Logout' %}"><b>Cerrar sesion</b></a>
                 
@@ -63,7 +67,7 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Bienvenidos al Taller Mecanico!</h1>
+                            <h1 class="mb-5">Mecanica CODER'S</h1>
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->

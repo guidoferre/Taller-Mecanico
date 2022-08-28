@@ -2,28 +2,36 @@
 
 
 {% block bloqueQueCambia %}
-   <h1>Bienvenidos a la seccion de clientes </h1>
-   <p>Aqui encontraras un listado de todos tus clientes y sus vehiculos</p>
-   
-   <ul>
+<div class="cont-tittle">
+  <div class="tittle-subtittle">
+     <br>
+     <br>
 
-        
-    {% for clientes in object_list  %}
-        <li>
-           <a href="{% url 'clientesDetail' clientes.id %}">{{clientes}}</a> 
-        </li>
-        <button>
-            <a href="{% url 'EliminarCliente' clientes.id %}">Eliminar</a> 
-        </button>
-        
-    {% endfor %}
-        
+      <h1 class='tittle'>Listado de clientes.</h1>
+      <h3>Aqui encontraras un listado de todos tus clientes y sus vehiculos</h3>
+      <br>
+      <ul>
+
+            
+      {% for clientes in object_list  %}
+          <li>
+              <a class='mi-link' style='color:white' href="{% url 'clientesDetail' clientes.id %}">{{clientes}}</a> <a href="{% url 'EliminarCliente' clientes.id %}" class='btn btn-primary'>Eliminar</a>
+              <br>
+              <br>
+          </li>
+                 
+            
+        {% endfor %}
+            
 
 
-    </ul>
+        </ul>
 
-    
+      <a href="{% url 'lista' %}" class='mi-link'>Volver</a>
+</div>
+<br>
 
+</div>
     
 {% endblock bloqueQueCambia  %}
     

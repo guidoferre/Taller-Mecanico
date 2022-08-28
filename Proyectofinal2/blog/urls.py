@@ -1,13 +1,16 @@
 from django.urls import path
-from blog.views import Cliente, ClienteCreate, ClienteDelete, ClienteDetail, ClienteList, EditaElimina, EditarDatos, LoginView, agregar_avatar, cliente, editar_perfil, editarCliente, eliminarCliente, lista_clientes, mecanico, BusquedaCliente, ClienteFormulario, register, reparacion, inicio, Buscar
+from blog.views import Cliente, ClienteCreate, ClienteDelete, ClienteDetail, ClienteList, EditaElimina, EditarDatos, LoginView, Quienes_Somos, agregar_avatar, cliente, editar_perfil, editarCliente, eliminarCliente, lista_clientes, mecanico, BusquedaCliente, ClienteFormulario, mecanicoFormulario, register, reparacion, inicio, Buscar, listaMecanicos, deleteMecanico, updateMecanico
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
+    path('', inicio, name="inicio"),
     path('inicio/', inicio, name="inicio"),
     path('cliente/', Cliente, name ='cliente'),
+    path('quienes_somos/', Quienes_Somos, name ='quienesSomos'),
     path('mecanico/', mecanico, name="mecanico"),
-    path('reparaciones/', reparacion, name= "reparaciones"),
+    path('Reparaciones/<int:start_page>', reparacion, name= "reparaciones"),
     path('clienteFormulario/',ClienteFormulario, name="clienteFormulario" ),
+    path('mecanicoFormulario/',mecanicoFormulario, name="MecanicoFormulario" ),
     path('buscarcliente/', BusquedaCliente, name="BusquedaCliente" ),
     path('buscar/', Buscar , name ="Buscar" ), 
     path('lista-clientes/', lista_clientes, name ="lista" ), 
@@ -24,10 +27,10 @@ urlpatterns = [
     path('agregar-avatar/', agregar_avatar, name ="CrearAvatar" ),  
     path('editar-datos/', EditarDatos, name ="EditarDatos" ),  
     path('EditaEliminaCliente/', EditaElimina, name ="EditaEliminaCliente" ), 
+    path('listaMecanicos/', listaMecanicos, name ="listaMecanicos" ), 
+    path('updateMecanico/<int:id>', updateMecanico, name ="updateMecanico" ), 
+
+    path('deleteMecanico/<int:pk>', deleteMecanico.as_view(), name ="deleteMecanico" ),  
 
 
-
-
-
-    
 ]

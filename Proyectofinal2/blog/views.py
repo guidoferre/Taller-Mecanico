@@ -1,8 +1,8 @@
 from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
-from blog.models import Avatar, cliente, mecanico, Reparacion
-from blog.forms import AvatarFormulario, UserEditForm, clienteFormulario
+from blog.models import Avatar, cliente, Reparacion, mecanico
+from blog.forms import AvatarFormulario, UserEditForm, clienteFormulario, MecanicoFormulario
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
@@ -32,6 +32,12 @@ def Cliente(request):
     return render(request, "clientes.html")
 
 
+def Quienes_Somos(request):
+
+    return render(request, "QuienesSomos.html")
+
+
+
 def EditaElimina(request):
     lista = cliente.objects.all()
 
@@ -39,17 +45,28 @@ def EditaElimina(request):
 
 
 @staff_member_required(login_url='Login')
-def mecanico(request):
+def mecanicoo(request):
     
     return render(request, "mecanicos.html")
 
 
 
-def reparacion(request):
+
+def reparacion(request, start_page):
 
     print('POST\n:', request.POST)
-    lista_reparaciones = Reparacion.objects.all()
-    return render(request, "Reparaciones.html", {'lista_reparaciones':lista_reparaciones})
+
+
+    if request.GET.get('direction') == 'next':
+        start_page += 1
+
+    elif request.GET.get('direction') == 'previous':
+        start_page -= 1
+
+
+    lista_reparaciones = Reparacion.objects.all()[start_page * 3 : (start_page + 1) * 3]
+
+    return render(request, "Reparaciones.html", {'lista_reparaciones':lista_reparaciones, 'current_page' : start_page})
 
     
 
@@ -66,7 +83,7 @@ def ClienteFormulario(request):
 
             data=miFormulario.cleaned_data
 
-            Cliente = cliente(nombre = data['nombre'], apellido= data ['apellido'], vehiculo=data['vehiculo'])
+            Cliente = cliente(nombre = data['nombre'], apellido= data ['apellido'], vehiculo=data['vehiculo'], desperfecto=data['desperfecto'])
             Cliente.save()
             return render(request, "Bienvenida.html", {"mensaje": "Cliente cargado con exito"})
 
@@ -74,6 +91,78 @@ def ClienteFormulario(request):
         miFormulario = clienteFormulario()
 
     return render(request, "clienteFormulario.html", {"miFormulario": miFormulario})
+
+
+
+def mecanicoFormulario(request):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        miFormulario = MecanicoFormulario(request.POST)
+        if miFormulario.is_valid():
+
+            data=miFormulario.cleaned_data
+
+            Mecanico = mecanico(nombre = data['nombre'], apellido= data ['apellido'], especialidad = data ['especialidad'])
+            Mecanico.save()
+            return render(request, "Bienvenida.html", {"mensaje": "Mecanico cargado con exito"})
+
+    else:
+        miFormulario = MecanicoFormulario()
+
+    return render(request, "MecanicoFormulario.html", {"miFormulario": miFormulario})
+
+
+def listaMecanicos(request):
+
+    mecanicos = mecanico.objects.all()
+    contexto = {'mecanicos': mecanicos}
+
+    return render(request, 'listaMecanicos.html', contexto)
+
+
+class deleteMecanico (DeleteView):
+
+    model= mecanico
+    template_name = 'deleteMecanico.html'
+    success_url = '/inicio/'
+
+
+def updateMecanico (request, id):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    mecanicoEditado = mecanico.objects.get(id=id)
+
+
+    if request.method == 'POST':
+
+        miFormulario = MecanicoFormulario(request.POST)
+
+        if miFormulario.is_valid():
+
+            data=miFormulario.cleaned_data
+            mecanicos = mecanico.objects.all()
+            mecanicoEditado.nombre = data["nombre"]
+            mecanicoEditado.apellido = data["apellido"]
+            mecanicoEditado.especialidad= data["especialidad"]
+            
+            mecanicoEditado.save()
+
+            return render(request, "listaMecanicos.html", {'mecanicos': mecanicos})
+
+    else:
+        miFormulario = MecanicoFormulario(initial= {
+            "nombre": mecanicoEditado.nombre,
+            "apellido": mecanicoEditado.apellido,
+            "especialidad": mecanicoEditado.especialidad,
+        })
+
+    return render(request, "updateMecanico.html", {"miFormulario": miFormulario, "id": mecanicoEditado.id})
 
 
 
@@ -91,7 +180,7 @@ def Buscar(request):
         return render(request, "ResultadoBusqueda.html", {"cliente": clientes, "nombre": nombre})
 
     else:
-        respuesta= "no enviaste datos"
+        respuesta= "No enviaste datos."
 
     return HttpResponse(respuesta)  
 
@@ -151,6 +240,8 @@ def editarCliente (request, id):
         })
 
     return render(request, "editarCliente.html", {"miFormulario": miFormulario, "id": clienteEditado.id})
+
+
 
 class ClienteList (LoginRequiredMixin, ListView):
 

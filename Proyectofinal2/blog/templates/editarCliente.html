@@ -2,16 +2,25 @@
 
 
 {% block bloqueQueCambia %}
-  <h1>Bienvenidos a la seccion de Cargar Clientes con formularios</h1>
 
-  <form action="{% url 'editarCliente' id %}" method="POST">
-    {% csrf_token %}
+<div class="cont-tittle">
+  <div class="tittle-subtittle">
+     <br>
+     <br>
+      <h1 class='tittle'>Edita los datos de tus clientes.</h1>
+      <br>
+      <form action="{% url 'editarCliente' id %}" method="POST">
+        {% csrf_token %}
 
-   {{miFormulario.as_p}}
-    <input type="submit" value="Enviar">
+      {{miFormulario.as_p}}
+      <br>
+        <input type="submit" value="Enviar" class='btn btn-primary' >
+        
 
-  </form>
-  
+      </form>
+      <br>
+  </div>
+</div>
     
 {% endblock bloqueQueCambia  %}
     

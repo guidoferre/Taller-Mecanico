@@ -2,9 +2,18 @@
 
 
 {% block bloqueQueCambia %}
-  <h1>Gracias por visitarnos!! </h1>
-  <a href="{% url 'inicio' %}">Ir al inicio</a>
-  <p></p>
-    
+<div class="cont-tittle">
+  <div class="tittle-subtittle">
+    <br>
+    <br>
+    <h1 class='tittle'>Gracias por visitarnos !<a href="{% url 'inicio' %}">
+      <img src="../static/blog/assets/img/logo.png" alt="" width="250px"></a></h1> 
+    <br>
+    <br>
+    <a href="{% url 'inicio' %}" class='mi-link' style='color:white'>Ir al inicio</a>
+    <br>
+    <br>
+  </div>
+</div>
 {% endblock bloqueQueCambia  %}
     

@@ -2,15 +2,23 @@
 
 
 {% block bloqueQueCambia %}
-  <h1>Bienvenido aqui podras editar tus datos</h1>
+<div class="cont-tittle">
+  <div class="tittle-subtittle">
+    <br>
+    <br>
+
+    <h1 class='tittle'>Bienvenido {{user.username}}! Aqui podras editar tus datos.</h1>
   
-  <p>En esta seccion podras editar tus datos, escoge la opcion que desees </p>
-  <ul>
-    <a href="{% url 'EditarPerfil' %}">Editar Perfil</a>
-    <p></p>
-    <a href="{% url 'CrearAvatar' %}">Cargar Avatar</a>
-  </ul>  
-  
+    <h4>Podes editar tus datos personales, los de tu vehiculo y hasta cargar tu avatar !</h4>
+    <br>
+    <ul>
+      <a class='mi-link' href="{% url 'EditarPerfil' %}">Editar Perfil</a>
+      <p></p>
+      <a class='mi-link' href="{% url 'CrearAvatar' %}">Cargar Avatar</a>
+    </ul> 
+    <br> 
+  </div>
+</div>
     
 {% endblock bloqueQueCambia  %}
     

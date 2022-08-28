@@ -2,15 +2,23 @@
 
 
 {% block bloqueQueCambia %}
-  <h1>Login de usuario</h1>
 
-  <form action="{% url 'Login' %}" method="POST">
-    {% csrf_token %}
+<div class="cont-tittle">
+  <div class="tittle-subtittle">
+    <br>
+    <br>
+    <h1 class='tittle'>Login</h1>
 
-   {{miFormulario.as_p}}
-    <input type="submit" value="Iniciar Sesion">
+    <form action="{% url 'Login' %}" method="POST">
+      {% csrf_token %}
 
-  </form>
+    {{miFormulario.as_p}}
+      <input type="submit" value="Iniciar Sesion" class='btn btn-primary'>
+
+    </form>
+    <br> 
+  </div>
+</div>
   
     
 {% endblock bloqueQueCambia  %}
