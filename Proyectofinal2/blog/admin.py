@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from blog.models import Avatar, cliente, mecanico, Reparacion
 
-
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'apellido', 'vehiculo']
     search_fields = ['nombre']

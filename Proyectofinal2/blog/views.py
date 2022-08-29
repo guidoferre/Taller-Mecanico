@@ -71,6 +71,8 @@ def reparacion(request, start_page):
     
 
 
+
+
 def ClienteFormulario(request):
 
     print('method:', request.method)

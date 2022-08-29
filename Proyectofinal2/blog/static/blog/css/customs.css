@@ -125,3 +125,9 @@
 .pagination {
   margin-left: 30px;
 }
+
+.mi-post {
+  color: white;
+  font-size: 18px;
+  transition: 0.3s ease;
+}

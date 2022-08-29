@@ -32,7 +32,6 @@ class Reparacion(models.Model):
     descripcion = models.CharField(max_length=140, null=True)
     imagen = models.ImageField(upload_to='imagenes', blank=True, null = True)
     fechaDeEntrega = models.DateField()
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     video = models.URLField( max_length=200, null = True)
 
     
