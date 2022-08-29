@@ -188,7 +188,7 @@ def Buscar(request):
 
 
 
-
+@staff_member_required(login_url='Login')
 def lista_clientes(self):
 
     lista = cliente.objects.all()
@@ -375,3 +375,11 @@ def agregar_avatar(request):
 def EditarDatos(request):
 
     return render(request, "EditarDatos.html")
+
+def About(request):
+
+    return render(request, "About.html")
+
+def contact(request):
+
+    return render(request, "contact.html")
