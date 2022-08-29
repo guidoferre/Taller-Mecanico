@@ -10,6 +10,7 @@ class cliente(models.Model):
     apellido = models.CharField(max_length=50)
     vehiculo = models.CharField(max_length=20)
     desperfecto = models.CharField(max_length=20, null = True)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, null = True)
 
     def __str__(self) -> str:
         return f' {self.nombre} {self.apellido} - {self.vehiculo} - {self.desperfecto}'
@@ -21,7 +22,7 @@ class mecanico(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     especialidad = models.CharField(max_length=50, null = True)
-
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, null = True)
 
     def __str__(self) -> str:
         return f' {self.nombre} {self.apellido} - {self.especialidad} '

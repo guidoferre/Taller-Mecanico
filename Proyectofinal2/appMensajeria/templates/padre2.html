@@ -33,9 +33,21 @@
                 <a href="{% url 'inicio' %}"><img src="../static/blog/assets/img/logo.png" alt="" width="150px"></a>
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
                 <a class="navbar-brand" href="{% url 'quienesSomos' %}">Nosotros</a>
-                <a class="navbar-brand" href="{% url 'MecanicoFormulario' %}">Mecanicos</a>
+
+                {% if  user.is_staff %}
+
+                    <a class="navbar-brand" href="{% url 'MecanicoFormulario' %}">Mecanicos</a>
+
+                {% endif %}
+                
                 <a class="navbar-brand" href="{% url 'reparaciones' 0 %}">Reparaciones</a>
-                <a class="navbar-brand" href="{% url 'lista' %}">Clientes</a>
+
+                {% if request.user.mecanico or user.is_staff %}
+
+                    <a class="navbar-brand" href="{% url 'lista' %}">Clientes</a>
+
+                {% endif %}
+            
                 <a class="navbar-brand" href="{% url 'appMensajeria:blog' %}">Comentarios</a>
 
                 

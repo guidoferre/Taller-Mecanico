@@ -11,13 +11,28 @@
         <h4> Dejanos tu comentario contando tu experiencia con <b>Mecanica CODER'S</b></h4>
 
         <br>
-        {% for post in posts  %}
-        <ul>
-            <a class='mi-post' href="{% url 'appMensajeria:detail'  post.id %}">{{post.titulo}} - {{post.nombre}} - {{post.fecha}}</a>
-            <a class='btn btn-primary' href="{% url 'appMensajeria:delete'  post.id %}">Eliminar</a>
-            <br>
-        </ul>
-        {% endfor %}
+
+        {% if user.is_staff %}
+
+            {% for post in posts  %}
+            <ul>
+                <a class='mi-post' href="{% url 'appMensajeria:detail'  post.id %}">{{post.titulo}} - {{post.nombre}} - {{post.fecha}}</a>
+                <a class='btn btn-primary' href="{% url 'appMensajeria:delete'  post.id %}">Eliminar</a>
+                <br>
+            </ul>
+            {% endfor %}
+
+
+        {% else %}
+            {% for post in posts  %}
+            <ul>
+                <a class='mi-post' href="{% url 'appMensajeria:detail'  post.id %}">{{post.titulo}} - {{post.nombre}} - {{post.fecha}}</a>
+                <br>
+            </ul>
+            {% endfor %}
+
+        {% endif %}
+
         <br>
 
         <a class='btn btn-primary' href=" {% url 'appMensajeria:create' %}">Contanos tu experiencia</a>

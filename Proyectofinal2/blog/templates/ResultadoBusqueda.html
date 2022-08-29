@@ -2,31 +2,40 @@
 
 
 {% block bloqueQueCambia %}
+<div class="cont-tittle">
+    <div class="tittle-subtittle">
+       <br>
+       <br>
+        <h3 class='tittle'>Estamos buscando al cliente : <span style='color:white'> {{nombre}}. </span></h3>
 
-<p>Estamos buscando al cliente : {{nombre}}</p>
+        <br>
 
+            {% if cliente %}
 
-    {% if cliente %}
+                <ul>
+                    
+                    {% for clientes in cliente %}
 
-        <ul>
+                    <li>
+                        <h4>{{clientes.nombre}} {{clientes.apellido}} - {{clientes.vehiculo}}<h4>
+
+                    </li>
+                        
+                    {% endfor %}
+
+                </ul>
+
             
-            {% for clientes in cliente %}
+            {% else %}
 
-               <li>
-                {{clientes.nombre}} {{clientes.apellido}} - {{clientes.vehiculo}}
+            <h3 class='tittle' style='color:white'> No hubo coincidencias.  </h3>
 
-               </li>
-                
-            {% endfor %}
+            {% endif %}
+            <br>
+        <a class='mi-link' href='{% url "BusquedaCliente" %}'>Volver</a>
 
-        </ul>
-    
-    {% else %}
-
-       <p> No hubo coincidencias  :'( </p>
-
-    {% endif %}
-    
-    
+    <br><br>
+</div>
+</div> 
 {% endblock bloqueQueCambia  %}
     

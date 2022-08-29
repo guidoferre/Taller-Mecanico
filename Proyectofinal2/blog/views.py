@@ -1,14 +1,16 @@
 from urllib import request
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from blog.models import Avatar, cliente, Reparacion, mecanico
 from blog.forms import AvatarFormulario, UserEditForm, clienteFormulario, MecanicoFormulario
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+
 
 # Create your views here.
 
@@ -72,7 +74,7 @@ def reparacion(request, start_page):
 
 
 
-
+@login_required
 def ClienteFormulario(request):
 
     print('method:', request.method)
@@ -103,27 +105,57 @@ def mecanicoFormulario(request):
 
     if request.method == 'POST':
 
-        miFormulario = MecanicoFormulario(request.POST)
-        if miFormulario.is_valid():
+        info = request.POST
+        miFormulario = MecanicoFormulario({
+            'nombre':info['nombre'],
+            'apellido':info['apellido'],
+            'especialidad':info['especialidad'],
+        })
 
-            data=miFormulario.cleaned_data
+        userForm = UserCreationForm({
+            'username':info['username'],
+            'password1':info['password1'],
+            'password2':info['password2'],
+        })
 
-            Mecanico = mecanico(nombre = data['nombre'], apellido= data ['apellido'], especialidad = data ['especialidad'])
+
+
+        if miFormulario.is_valid() and userForm.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            data.update(
+                userForm.cleaned_data
+            )
+
+            user = User(
+                username = data['username'],
+            )
+
+            user.set_password(data['password1'])
+            user.save()
+
+            Mecanico = mecanico(nombre = data['nombre'], apellido= data ['apellido'], especialidad = data ['especialidad'], user_id = user )
             Mecanico.save()
             return render(request, "Bienvenida.html", {"mensaje": "Mecanico cargado con exito"})
 
+
     else:
+
         miFormulario = MecanicoFormulario()
 
-    return render(request, "MecanicoFormulario.html", {"miFormulario": miFormulario})
+        userForm = UserCreationForm()
+
+    return render(request, "MecanicoFormulario.html", {"miFormulario": miFormulario, 'userForm': userForm})
+
 
 
 def listaMecanicos(request):
+        mecanicos = mecanico.objects.all()
+        contexto = {'mecanicos': mecanicos}
+        return render(request, 'listaMecanicos.html', contexto)
+        
 
-    mecanicos = mecanico.objects.all()
-    contexto = {'mecanicos': mecanicos}
-
-    return render(request, 'listaMecanicos.html', contexto)
 
 
 class deleteMecanico (DeleteView):
@@ -182,9 +214,8 @@ def Buscar(request):
         return render(request, "ResultadoBusqueda.html", {"cliente": clientes, "nombre": nombre})
 
     else:
-        respuesta= "No enviaste datos."
 
-    return HttpResponse(respuesta)  
+        return render(request, 'busquedavacia.html')  
 
 
 

@@ -32,9 +32,21 @@
                 <a href="{% url 'inicio' %}"><img src="../static/blog/assets/img/logo.png" alt="" width="130px"></a>
                 <a class="navbar-brand" href="{% url 'inicio' %}"><img src='../static/blog/assets/img/icon-home.png'  width="25px"> Inicio</a>
                 <a class="navbar-brand" href="{% url 'quienesSomos' %}"><img src="../static/blog/assets/img/icono-nosotros.png" alt="" width="35px">Nosotros</a>
-                <a class="navbar-brand" href="{% url 'MecanicoFormulario' %}"><img src='../static/blog/assets/img/mecanicos.png'  width="25px"> Mecanicos</a>
+
+                {% if  user.is_staff %}
+
+                    <a class="navbar-brand" href="{% url 'MecanicoFormulario' %}"><img src='../static/blog/assets/img/mecanicos.png'  width="25px"> Mecanicos</a>
+
+                {% endif %}
+
                 <a class="navbar-brand" href="{% url 'reparaciones' 0 %}"><img src='../static/blog/assets/img/icon-servicio.png'  width="25px"> Reparaciones</a>
-                <a class="navbar-brand" href="{% url 'lista' %}"><img src='../static/blog/assets/img/icon-clientes.png'  width="25px"> Clientes</a>
+                
+                {% if request.user.mecanico or user.is_staff %}
+
+                    <a class="navbar-brand" href="{% url 'lista' %}"><img src='../static/blog/assets/img/icon-clientes.png'  width="25px"> Clientes</a>
+
+
+                {% endif %}
                 <a class="navbar-brand" href="{% url 'appMensajeria:blog' %}"><img src='../static/blog/assets/img/comentarios-logo.png'  width="45px">Comentarios</a>
 
                 

@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+
+
+{% block bloqueQueCambia %}
+<div class="cont-tittle">
+    <div class="tittle-subtittle">
+        <br><br>
+        <h3 class='tittle'>No ingresaste un nombre valido</h3>
+        <h4>Intenta nuevamente.</h4>
+        <br><br>
+        <a class='mi-link' href='{% url "BusquedaCliente" %}'>Volver</a>
+        <br><br>
+    </div>
+</div> 
+{% endblock bloqueQueCambia  %}
+    
