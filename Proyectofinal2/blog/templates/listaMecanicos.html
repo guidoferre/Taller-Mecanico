@@ -13,30 +13,23 @@
     
     {% for mecanico in mecanicos %}
         
-        <li> {{mecanico}} 
+       
             
-            {% if user.is_authenticated %}
+            {% if user.is_staff %}
                      
-                     {% if url %}
-                     
-                     
+                <li> {{mecanico}} 
+                    <a class='btn btn-primary' href="{% url 'deleteMecanico' mecanico.id %}"> Eliminar </a>
+                    <a class='btn btn-secondary' href="{% url 'updateMecanico' mecanico.id %}"> Editar </a>
+                </li>
                         
-                     {% endif %}
+                     
+            {% else %}
 
+                <li> {{mecanico}} </li>
 
+            {% endif %}
                 
-                {% else %}
-                    
-                {% endif %}
-                
-          
-          
-            <br>
-            <br>
-        </li>
-        
-
-         
+         <br>
 
     {% endfor %}
       
@@ -55,6 +48,7 @@
    
 {% endif %}
 
+<a href="{% url 'reparaciones' 0 %}" class='mi-link'><b>Volver</b></a>
     </div>
     <br>
 

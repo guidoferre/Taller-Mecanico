@@ -7,19 +7,31 @@
      <br>
      <br>
 
-      <h1 class='tittle'>Listado de clientes.</h1>
-      <h3>Aqui encontraras un listado de todos tus clientes y sus vehiculos</h3>
+      <h1 class='tittle'>Clientes.</h1>
+      <h3>Listado de todos tus clientes y sus vehiculos</h3>
       <br>
       <ul>
 
             
       {% for clientes in object_list  %}
+
+      
+          {% if user.is_staff %}
+            
+                <li>
+                    <a class='mi-link' style='color:white' href="{% url 'clientesDetail' clientes.id %}">{{clientes}}</a> <a href="{% url 'EliminarCliente' clientes.id %}" class='btn btn-primary'>Eliminar</a>
+                    <br>
+                    <br>
+                </li>
+                    
+
+          {% else %}
           <li>
-              <a class='mi-link' style='color:white' href="{% url 'clientesDetail' clientes.id %}">{{clientes}}</a> <a href="{% url 'EliminarCliente' clientes.id %}" class='btn btn-primary'>Eliminar</a>
-              <br>
-              <br>
-          </li>
-                 
+            <a class='mi-link' style='color:white' href="{% url 'clientesDetail' clientes.id %}">{{clientes}}</a>
+            <br>
+            <br>
+        </li>
+          {% endif %}
             
         {% endfor %}
             

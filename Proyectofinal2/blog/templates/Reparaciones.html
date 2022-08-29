@@ -19,7 +19,14 @@
     <p>Contamos con un equipo de profesionales altamente calificados, alcanzando los estándares de excelencia requeridos en la industria
       automotriz. Nuestros técnicos son capaces de reparar toda marca y modelo de vehículo usando
       neumáticos de primeras marcas <br> y repuestos de excelente calidad.</p>
-      <a href="{% url 'clienteFormulario' %}"><button class='btn btn-primary'>Solicitar reparacion</button></a>
+
+      
+      {% if not request.user.mecanico %}
+        <a href="{% url 'clienteFormulario' %}"><button class='btn btn-primary'>Solicitar reparacion</button></a>
+        
+      {% endif %}
+        
+
       <br>
       <br>
       <a href="{% url 'listaMecanicos' %}"><button class='btn btn-primary'>Ver Lista Mecanicos</button></a>

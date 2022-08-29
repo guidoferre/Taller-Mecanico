@@ -2,8 +2,20 @@
 
 
 {% block bloqueQueCambia %}
-   <h1>Detalle del cliente {{cliente.nombre}} {{cliente.apellido}} </h1>
- <p>aqui encontraras los detalles que especifico el cliente para la reparacion de su vehiculo</p>
-<p> Vehiculo: {{cliente.vehiculo}}</p>
-    
+
+<div class="cont-tittle">
+  <div class="tittle-subtittle">
+     <br>
+     <br>
+          <h1 class='tittle'>Detalle del cliente: <span style='color:white'>{{cliente.nombre}} {{cliente.apellido}}</span> </h1>
+          <p>Aqui encontraras los detalles que especifico el cliente para la reparacion de su vehiculo</p>
+          <p> Vehiculo: {{cliente.vehiculo}}</p>
+          <p> Desperfecto: {{cliente.desperfecto}}</p>
+     
+<a href='{% url "clientelist" %}' class='mi-link'>Volver</a>
+  
+  </div>
+<br>
+
+</div>
 {% endblock bloqueQueCambia  %}

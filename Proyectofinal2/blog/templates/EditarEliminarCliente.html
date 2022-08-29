@@ -12,10 +12,10 @@
         <br>
             {% for clientes in lista_clientes %}
                 <div>
-                    <form action="{% url 'eliminaCliente' clientes.id %}"  method="POST"> {% csrf_token %}
+                    <form  method="POST"> {% csrf_token %}
                         <li> 
                             <a  class='mi-link' style='color:white'> {{clientes.nombre}} {{clientes.apellido}} </a>
-                            <button type="submit" class="btn btn-primary" >Eliminar</button>
+                            <button type="submit" class="btn btn-primary" href='{% url "eliminaCliente" clientes.id %}'>Eliminar</button>
                             <button class='btn btn-secondary'><a href="{% url 'editarCliente' clientes.id %}">Editar</a></button>
                         </li>
                         <br>                 

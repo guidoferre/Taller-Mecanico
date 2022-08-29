@@ -219,7 +219,6 @@ def Buscar(request):
 
 
 
-@staff_member_required(login_url='Login')
 def lista_clientes(self):
 
     lista = cliente.objects.all()
@@ -260,16 +259,18 @@ def editarCliente (request, id):
             clienteEditado.nombre = data["nombre"]
             clienteEditado.apellido = data["apellido"]
             clienteEditado.vehiculo= data["vehiculo"]
+            clienteEditado.desperfecto= data["desperfecto"]
             
             clienteEditado.save()
 
-            return render(request, "padre.html")
+            return render(request, "lista_clientes.html")
 
     else:
         miFormulario = clienteFormulario(initial= {
             "nombre": clienteEditado.nombre,
             "apellido": clienteEditado.apellido,
             "vehiculo": clienteEditado.vehiculo,
+            "desperfecto": clienteEditado.desperfecto,
         })
 
     return render(request, "editarCliente.html", {"miFormulario": miFormulario, "id": clienteEditado.id})

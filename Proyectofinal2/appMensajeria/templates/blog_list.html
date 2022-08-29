@@ -35,7 +35,16 @@
 
         <br>
 
-        <a class='btn btn-primary' href=" {% url 'appMensajeria:create' %}">Contanos tu experiencia</a>
+        
+        {% if not request.user.mecanico %}
+
+            {% if user.is_authenticated %}
+            <a class='btn btn-primary' href=" {% url 'appMensajeria:create' %}">Contanos tu experiencia</a>
+            {% endif %}
+            
+        {% endif %}
+            
+
     </div>
     <br>
   
